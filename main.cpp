@@ -17,39 +17,33 @@ using namespace std;
 
 // Build F7, Run Shift F5. OR Ctrl Shift P Cmake -> build/run/debug...
 
+bool isNumeric(char inputChar)
+{
+    return (inputChar <= '9' && inputChar >= '0');
+}
+
 bool isPalindrome(std::string &inputString)
 {
     bool returnValue = true;
-    int middleChar;
     int stringLength = inputString.length();
-
+    int middleChar = stringLength / 2;
     //Check if length is even -> not palindrome
-    if (stringLength % 2 == 0)
+    if ((stringLength % 2 == 0) || !isNumeric(inputString.at(middleChar)))
     {
         returnValue = false;
-        return returnValue;
-    }
-
-    middleChar = stringLength / 2;
-
-    if ((inputString.at(middleChar) <= '9') && (inputString.at(middleChar) >= '0'))
-    {
-        //do nothing
     }
     else
     {
-        returnValue = false;
-        return returnValue;
-    }
-
-    for (int n = 0; n <= middleChar; n++)
-    {
-        if (inputString.at(n) != inputString.at(stringLength - n - 1))
+        for (int n = 0; n <= middleChar; n++)
         {
-            returnValue = false;
-            break;
+            if (inputString.at(n) != inputString.at(stringLength - n - 1))
+            {
+                returnValue = false;
+                break;
+            }
         }
     }
+
     return returnValue;
 }
 
